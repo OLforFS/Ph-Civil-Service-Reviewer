@@ -1,0 +1,473 @@
+{
+  "constitutional-law": {
+    "name": "Constitutional Law",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Three Branches of Government",
+        "content": "The Philippines government has 3 branches that work together:",
+        "points": [
+          "🏛️ **Executive Branch** - Led by the President, implements laws",
+          "🏛️ **Legislative Branch** - Congress (Senate + House), makes laws", 
+          "🏛️ **Judicial Branch** - Supreme Court + lower courts, interprets laws"
+        ],
+        "memory_tip": "💡 **Memory Tip:** Think **ELJ** - Executive, Legislative, Judicial",
+        "example": "📝 **Example:** When Congress passes a law (Legislative), the President signs it (Executive), and courts decide if it's constitutional (Judicial)."
+      },
+      {
+        "id": 2,
+        "title": "Bill of Rights Basics",
+        "content": "The Philippine Constitution protects citizen rights:",
+        "points": [
+          "🗣️ **Freedom of Speech** - Express opinions freely",
+          "⛪ **Freedom of Religion** - Practice any faith",
+          "📰 **Freedom of Press** - Media can report news",
+          "🚫 **Due Process** - Fair treatment in legal proceedings"
+        ],
+        "memory_tip": "💡 **Remember:** Your rights end where another person's rights begin",
+        "example": "📝 **Real Life:** You can criticize government policies (free speech) but cannot spread false information that harms others."
+      },
+      {
+        "id": 3,
+        "title": "Presidential Requirements",
+        "content": "To become President of the Philippines, you must be:",
+        "points": [
+          "👤 **Age:** At least 40 years old",
+          "🇵🇭 **Citizenship:** Natural-born Filipino citizen",
+          "🗳️ **Voter:** Registered voter",
+          "📍 **Residency:** Resident of PH for at least 10 years before election"
+        ],
+        "memory_tip": "💡 **Remember:** 40-10 rule (40 years old, 10 years resident)",
+        "example": "📝 **Why 40?** The framers wanted mature, experienced leaders for the highest office."
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "question": "What are the three branches of government according to the Constitution?",
+        "type": "multiple-choice",
+        "options": [
+          "Executive, Legislative, Judicial",
+          "Federal, State, Local",
+          "Senate, House, Supreme Court",
+          "President, Congress, Cabinet",
+          "Military, Civilian, Religious"
+        ],
+        "correct": 0,
+        "explanation": "The Constitution establishes three branches: Executive (President), Legislative (Congress), and Judicial (Courts). This separation of powers ensures checks and balances in government."
+      },
+      {
+        "id": 2,
+        "question": "Which amendment guarantees freedom of speech?",
+        "type": "multiple-choice",
+        "options": [
+          "Second Amendment",
+          "First Amendment",
+          "Fourth Amendment",
+          "Fifth Amendment",
+          "Tenth Amendment"
+        ],
+        "correct": 1,
+        "explanation": "The First Amendment protects freedom of speech, religion, press, assembly, and petition. It's fundamental to democratic society."
+      },
+      {
+        "id": 3,
+        "question": "What is the minimum age requirement to serve as President of the Philippines?",
+        "type": "multiple-choice",
+        "options": [
+          "30 years old",
+          "35 years old",
+          "40 years old",
+          "45 years old",
+          "50 years old"
+        ],
+        "correct": 2,
+        "explanation": "According to the 1987 Philippine Constitution, the President must be at least 40 years old, a natural-born Filipino citizen, and a registered voter."
+      },
+      {
+        "id": 4,
+        "question": "How many years is the term of office for a Philippine President?",
+        "type": "multiple-choice",
+        "options": [
+          "4 years",
+          "6 years",
+          "8 years",
+          "5 years",
+          "3 years"
+        ],
+        "correct": 1,
+        "explanation": "The President of the Philippines serves a single term of 6 years and cannot be re-elected."
+      },
+      {
+        "id": 5,
+        "question": "Which body has the power to impeach the President?",
+        "type": "multiple-choice",
+        "options": [
+          "Senate",
+          "House of Representatives",
+          "Supreme Court",
+          "Cabinet",
+          "Ombudsman"
+        ],
+        "correct": 1,
+        "explanation": "The House of Representatives has the exclusive power to initiate impeachment proceedings against the President."
+      },
+      {
+        "id": 6,
+        "question": "What is the highest court in the Philippines?",
+        "type": "multiple-choice",
+        "options": [
+          "Court of Appeals",
+          "Regional Trial Court",
+          "Supreme Court",
+          "Sandiganbayan",
+          "Constitutional Court"
+        ],
+        "correct": 2,
+        "explanation": "The Supreme Court is the highest judicial court in the Philippines and has final appellate jurisdiction."
+      },
+      {
+        "id": 7,
+        "question": "How many senators are there in the Philippine Senate?",
+        "type": "multiple-choice",
+        "options": [
+          "12",
+          "24",
+          "18",
+          "30",
+          "36"
+        ],
+        "correct": 1,
+        "explanation": "The Philippine Senate is composed of 24 senators elected at-large for 6-year terms."
+      }
+    ]
+  },
+  "public-admin": {
+    "name": "Public Administration",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "What is Public Administration?",
+        "content": "Public Administration is the implementation of government policies:",
+        "points": [
+          "🎯 **Purpose:** Serve the public interest efficiently",
+          "⚙️ **Function:** Implement laws and policies made by government",
+          "👥 **Focus:** Provide services to citizens",
+          "📊 **Goal:** Use public resources effectively"
+        ],
+        "memory_tip": "💡 **Think:** Public Admin = Public Service (serving the people)",
+        "example": "📝 **Examples:** Processing driver's licenses, collecting taxes, maintaining roads, running hospitals."
+      },
+      {
+        "id": 2,
+        "title": "Civil Service Commission (CSC)",
+        "content": "The CSC is the central personnel agency of the Philippines:",
+        "points": [
+          "👨‍💼 **Role:** Manages all government employees",
+          "📋 **Functions:** Conducts civil service exams",
+          "⚖️ **Authority:** Enforces merit and fitness in hiring",
+          "🛡️ **Protection:** Ensures job security for qualified workers"
+        ],
+        "memory_tip": "💡 **CSC = Civil Service Commission** (not Committee or Council)",
+        "example": "📝 **Real Impact:** CSC ensures government jobs go to qualified people, not just political connections."
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the primary purpose of public administration?",
+        "type": "multiple-choice",
+        "options": [
+          "To make profit for the government",
+          "To serve the public interest and implement policies",
+          "To control private businesses",
+          "To collect taxes only",
+          "To regulate international trade"
+        ],
+        "correct": 1,
+        "explanation": "Public administration exists to serve the public interest by implementing government policies and providing services to citizens efficiently and effectively."
+      },
+      {
+        "id": 2,
+        "question": "Who is considered the father of Public Administration?",
+        "type": "multiple-choice",
+        "options": [
+          "Max Weber",
+          "Woodrow Wilson",
+          "Frederick Taylor",
+          "Henri Fayol",
+          "Luther Gulick"
+        ],
+        "correct": 1,
+        "explanation": "Woodrow Wilson is considered the father of Public Administration for his 1887 essay 'The Study of Administration' which established it as a distinct field."
+      },
+      {
+        "id": 3,
+        "question": "What does CSC stand for in Philippine government?",
+        "type": "multiple-choice",
+        "options": [
+          "Civil Service Committee",
+          "Civil Service Commission",
+          "Central Service Council",
+          "Citizen Service Center",
+          "Constitutional Service Committee"
+        ],
+        "correct": 1,
+        "explanation": "CSC stands for Civil Service Commission, the central personnel agency of the Philippine government responsible for administering the civil service system."
+      },
+      {
+        "id": 4,
+        "question": "What is the principle of merit and fitness in civil service?",
+        "type": "multiple-choice",
+        "options": [
+          "Hiring based on political connections",
+          "Hiring based on qualifications and competence",
+          "Hiring based on seniority only",
+          "Hiring based on regional quotas",
+          "Hiring based on family relationships"
+        ],
+        "correct": 1,
+        "explanation": "Merit and fitness means hiring and promoting government employees based on their qualifications, competence, and performance rather than political or personal connections."
+      },
+      {
+        "id": 5,
+        "question": "What does POSDCORB stand for in public administration?",
+        "type": "multiple-choice",
+        "options": [
+          "Planning, Organizing, Staffing, Directing, Coordinating, Reporting, Budgeting",
+          "Policy, Operations, Systems, Development, Control, Review, Balance",
+          "Public, Official, Service, Delivery, Community, Relations, Building",
+          "Personnel, Operations, Strategic, Development, Coordination, Resources, Budget",
+          "Planning, Operations, Service, Distribution, Customer, Relations, Business"
+        ],
+        "correct": 0,
+        "explanation": "POSDCORB represents the seven functions of management: Planning, Organizing, Staffing, Directing, Coordinating, Reporting, and Budgeting, as defined by Luther Gulick."
+      }
+    ]
+  },
+  "general-knowledge": {
+    "name": "General Knowledge",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Philippine Geography & History",
+        "content": "Key facts about the Philippines:",
+        "points": [
+          "🏙️ **Capital:** Manila (political center)",
+          "🌊 **Geography:** 7,641 islands in Southeast Asia",
+          "👨‍⚕️ **National Hero:** Dr. Jose Rizal",
+          "📅 **Independence:** June 12, 1898 (from Spain)"
+        ],
+        "memory_tip": "💡 **Remember:** Manila = Capital, Rizal = Hero, June 12 = Independence",
+        "example": "📝 **Fun Fact:** Philippines is named after King Philip II of Spain."
+      },
+      {
+        "id": 2,
+        "title": "Basic Science Facts",
+        "content": "Essential science knowledge for civil service:",
+        "points": [
+          "🔴 **Mars:** The Red Planet (iron oxide gives red color)",
+          "🌍 **Earth:** Only planet with confirmed life",
+          "💧 **Water:** Boils at 100°C, freezes at 0°C",
+          "⚡ **Lightning:** Electrical discharge in atmosphere"
+        ],
+        "memory_tip": "💡 **Mars = Red** because of rust (iron oxide)",
+        "example": "📝 **Why Red?** Mars looks red because its surface contains iron that has rusted over millions of years."
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the capital city of the Philippines?",
+        "type": "multiple-choice",
+        "options": [
+          "Cebu City",
+          "Manila",
+          "Davao City",
+          "Quezon City",
+          "Iloilo City"
+        ],
+        "correct": 1,
+        "explanation": "Manila is the capital city of the Philippines, located on the island of Luzon and serves as the country's political and economic center."
+      },
+      {
+        "id": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "type": "multiple-choice",
+        "options": [
+          "Venus",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Mercury"
+        ],
+        "correct": 1,
+        "explanation": "Mars is called the Red Planet due to iron oxide (rust) on its surface, giving it a reddish appearance."
+      },
+      {
+        "id": 3,
+        "question": "Who is the national hero of the Philippines?",
+        "type": "multiple-choice",
+        "options": [
+          "Andres Bonifacio",
+          "Jose Rizal",
+          "Emilio Aguinaldo",
+          "Apolinario Mabini",
+          "Marcelo H. del Pilar"
+        ],
+        "correct": 1,
+        "explanation": "Dr. Jose Rizal is officially recognized as the national hero of the Philippines for his peaceful reform movement and literary works that inspired the revolution."
+      }
+    ]
+  },
+  "mathematics": {
+    "name": "Mathematics",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Percentage Calculations",
+        "content": "Percentages are essential for civil service exams:",
+        "points": [
+          "📊 **Formula:** (Part/Whole) × 100 = Percentage",
+          "🔢 **To find X% of Y:** (X/100) × Y",
+          "📈 **Percentage increase:** ((New-Old)/Old) × 100",
+          "📉 **Percentage decrease:** ((Old-New)/Old) × 100"
+        ],
+        "memory_tip": "💡 **Remember:** Percent means 'per hundred' - always divide by 100",
+        "example": "📝 **Example:** 15% of 200 = (15/100) × 200 = 0.15 × 200 = 30"
+      },
+      {
+        "id": 2,
+        "title": "Basic Geometry",
+        "content": "Key geometry facts for civil service:",
+        "points": [
+          "📐 **Triangle angles:** Always add up to 180°",
+          "⭕ **Circle:** 360° total, radius = half diameter",
+          "📏 **Rectangle area:** Length × Width",
+          "📐 **Triangle area:** (Base × Height) ÷ 2"
+        ],
+        "memory_tip": "💡 **Triangle trick:** 180° - just remember 'one-eighty'",
+        "example": "📝 **Example:** Triangle with 60° and 70° → Third angle = 180° - 60° - 70° = 50°"
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is 15% of 200?",
+        "type": "multiple-choice",
+        "options": [
+          "25",
+          "30",
+          "35",
+          "40",
+          "45"
+        ],
+        "correct": 1,
+        "explanation": "To find 15% of 200: (15/100) × 200 = 0.15 × 200 = 30"
+      },
+      {
+        "id": 2,
+        "question": "If a triangle has angles of 60° and 70°, what is the third angle?",
+        "type": "multiple-choice",
+        "options": [
+          "40°",
+          "50°",
+          "60°",
+          "70°",
+          "80°"
+        ],
+        "correct": 1,
+        "explanation": "The sum of angles in a triangle is always 180°. So: 180° - 60° - 70° = 50°"
+      },
+      {
+        "id": 3,
+        "question": "What is the square root of 144?",
+        "type": "multiple-choice",
+        "options": [
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ],
+        "correct": 2,
+        "explanation": "The square root of 144 is 12, because 12 × 12 = 144."
+      }
+    ]
+  },
+  "english": {
+    "name": "English Comprehension",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Grammar Fundamentals",
+        "content": "Essential grammar rules for civil service exams:",
+        "points": [
+          "📝 **Subject-Verb Agreement:** Singular subjects take singular verbs",
+          "🔤 **Spelling Rules:** 'i before e except after c' (with exceptions)",
+          "📖 **Sentence Structure:** Subject + Verb + Object",
+          "✏️ **Common Errors:** Their/There/They're, Your/You're"
+        ],
+        "memory_tip": "💡 **Team Rule:** 'Team' is singular → 'The team IS playing' (not ARE)",
+        "example": "📝 **Example:** 'The team is winning' vs 'The players are winning'"
+      },
+      {
+        "id": 2,
+        "title": "Vocabulary Building",
+        "content": "Expand your vocabulary for better comprehension:",
+        "points": [
+          "📚 **Synonyms:** Words with similar meanings (big = large)",
+          "🔄 **Antonyms:** Words with opposite meanings (hot ↔ cold)",
+          "🌱 **Root Words:** Understanding prefixes and suffixes",
+          "📖 **Context Clues:** Use surrounding words to guess meaning"
+        ],
+        "memory_tip": "💡 **Abundant = A-Bunch-Ant** → lots of ants = plentiful",
+        "example": "📝 **Context:** 'The abundant harvest' → harvest is large/plentiful"
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "question": "Choose the correct sentence:",
+        "type": "multiple-choice",
+        "options": [
+          "The team are playing well.",
+          "The team is playing well.",
+          "The team were playing well.",
+          "The team have playing well.",
+          "The team has playing well."
+        ],
+        "correct": 1,
+        "explanation": "When 'team' refers to the group as a single unit, use singular verb 'is'. 'The team is playing well' is correct."
+      },
+      {
+        "id": 2,
+        "question": "What is the synonym of 'abundant'?",
+        "type": "multiple-choice",
+        "options": [
+          "Scarce",
+          "Plentiful",
+          "Limited",
+          "Rare",
+          "Insufficient"
+        ],
+        "correct": 1,
+        "explanation": "Abundant means existing in large quantities. Plentiful is the closest synonym, meaning available in large amounts."
+      },
+      {
+        "id": 3,
+        "question": "Which word is spelled correctly?",
+        "type": "multiple-choice",
+        "options": [
+          "Recieve",
+          "Receive",
+          "Receve",
+          "Receeve",
+          "Recieeve"
+        ],
+        "correct": 1,
+        "explanation": "The correct spelling is 'Receive'. Remember the rule: 'i before e except after c' - but 'receive' is an exception where 'e' comes before 'i' after 'c'."
+      }
+    ]
+  }
+}

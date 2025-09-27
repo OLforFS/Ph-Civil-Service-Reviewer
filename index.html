@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civil Service Exam Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <div class="header">
+                <h1>📚 Civil Service Exam Prep</h1>
+                <p>Your AI study buddy for exam success</p>
+            </div>
+
+            <div class="topic-selection">
+                <label for="topic-select">Choose Your Topic:</label>
+                <select id="topic-select">
+                    <option value="constitutional-law">Constitutional Law</option>
+                    <option value="public-admin">Public Administration</option>
+                    <option value="general-knowledge">General Knowledge</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="english">English Comprehension</option>
+                </select>
+            </div>
+
+            <div class="mode-buttons">
+                <button class="mode-btn" data-mode="practice">
+                    <span class="icon">🎯</span>
+                    <span class="title">Practice Mode</span>
+                    <span class="desc">Learn with explanations</span>
+                </button>
+
+                <button class="mode-btn" data-mode="mock-exam">
+                    <span class="icon">⏱️</span>
+                    <span class="title">Mock Exam</span>
+                    <span class="desc">Timed test simulation</span>
+                </button>
+
+                <button class="mode-btn" data-mode="review">
+                    <span class="icon">📖</span>
+                    <span class="title">Review Mode</span>
+                    <span class="desc">Study key concepts</span>
+                </button>
+            </div>
+
+            <div class="progress-summary">
+                <h3>Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress"></div>
+                </div>
+                <p id="progress-text">0% Complete</p>
+            </div>
+        </div>
+
+        <!-- Chat Screen -->
+        <div id="chat-screen" class="screen">
+            <div class="chat-header">
+                <button id="back-btn">← Back</button>
+                <div class="chat-info">
+                    <span id="current-topic"></span>
+                    <span id="current-mode"></span>
+                </div>
+                <div class="exam-stats">
+                    <div id="timer-display" class="timer hidden">⏱️ <span id="time-remaining">30:00</span></div>
+                    <div class="question-counter">
+                        <span id="question-progress">1/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div id="chat-messages"></div>
+            </div>
+
+            <div class="chat-input-area">
+                <div id="answer-options" class="answer-options hidden"></div>
+                <div class="input-group">
+                    <input type="text" id="chat-input" placeholder="Type your answer...">
+                    <button id="send-btn">Send</button>
+                </div>
+                <div class="chat-controls">
+                    <button id="next-btn" class="hidden">Next Question</button>
+                    <button id="finish-btn" class="hidden">Finish Session</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
