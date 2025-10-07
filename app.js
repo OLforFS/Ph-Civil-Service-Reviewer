@@ -12,6 +12,12 @@ class CivilServiceChat {
         this.timer = null;
         this.timeRemaining = 0;
         
+        // Review mode specific variables
+        this.currentLesson = null;
+        this.currentConceptIndex = 0;
+        this.waitingForMoreInput = false;
+        this.autoFlowPaused = false;
+        
         this.init();
     }
 
@@ -336,83 +342,182 @@ class CivilServiceChat {
                     ]
                 },
                 "general-knowledge": {
-                    "name": "General Knowledge",
+                    "name": "General Information",
                     "lessons": [
                         {
                             "id": 1,
-                            "title": "Philippine Geography & History",
-                            "content": "Key facts about the Philippines:",
+                            "title": "Philippine Constitution Fundamentals",
+                            "content": "Essential facts about the 1987 Philippine Constitution:",
                             "points": [
-                                "🏙️ **Capital:** Manila (political center)",
-                                "🌊 **Geography:** 7,641 islands in Southeast Asia",
-                                "👨‍⚕️ **National Hero:** Dr. Jose Rizal",
-                                "📅 **Independence:** June 12, 1898 (from Spain)"
+                                "📜 **Ratified:** February 2, 1987 (replaced 1973 Constitution)",
+                                "🗳️ **Plebiscite:** Approved by 76.37% of Filipino voters",
+                                "📖 **Articles:** 18 articles covering government structure and rights",
+                                "🏛️ **Sovereignty:** 'Sovereignty resides in the people' (Article II, Section 1)",
+                                "⚖️ **Rule of Law:** Philippines is a democratic and republican state"
                             ],
-                            "memory_tip": "💡 **Remember:** Manila = Capital, Rizal = Hero, June 12 = Independence",
-                            "example": "📝 **Fun Fact:** Philippines is named after King Philip II of Spain."
+                            "memory_tip": "💡 **1987 Constitution:** Remember 87 = 18 articles, sovereignty in people",
+                            "example": "📝 **Preamble:** 'We, the sovereign Filipino people...' establishes people as source of government power."
+                        },
+                        {
+                            "id": 2,
+                            "title": "Peace and Human Rights",
+                            "content": "Philippines' commitment to peace and human rights:",
+                            "points": [
+                                "🕊️ **Article II, Section 2:** Philippines renounces war as instrument of national policy",
+                                "👥 **Commission on Human Rights:** Constitutional body protecting human rights",
+                                "🤝 **Bangsamoro Peace Process:** Autonomous region for Muslim Mindanao",
+                                "🛡️ **Universal Declaration:** Philippines signed UDHR in 1948",
+                                "⚖️ **Indigenous Rights:** Indigenous Peoples Rights Act (RA 8371)"
+                            ],
+                            "memory_tip": "💡 **Peace Formula:** Renounce war + Protect rights + Respect diversity = Lasting peace",
+                            "example": "📝 **Bangsamoro:** Created through RA 11054 (2018) to address historical injustices in Mindanao."
+                        },
+                        {
+                            "id": 3,
+                            "title": "Environment Management and Protection",
+                            "content": "Philippine environmental laws and policies:",
+                            "points": [
+                                "🌱 **Article II, Section 16:** State protects and advances right to balanced ecology",
+                                "🏭 **Clean Air Act (RA 8749):** Comprehensive air pollution control program",
+                                "💧 **Clean Water Act (RA 9275):** Water quality management and protection",
+                                "♻️ **Ecological Solid Waste Management (RA 9003):** Waste reduction and recycling",
+                                "🌿 **Climate Change Act (RA 9729):** National framework for climate action"
+                            ],
+                            "memory_tip": "💡 **Environmental Laws:** Air (8749) + Water (9275) + Waste (9003) + Climate (9729)",
+                            "example": "📝 **Constitutional Mandate:** Every Filipino has the right to a balanced and healthful ecology."
                         }
                     ],
                     "questions": [
                         {
                             "id": 1,
-                            "question": "What is the capital city of the Philippines?",
+                            "question": "When was the 1987 Philippine Constitution ratified?",
                             "type": "multiple-choice",
                             "options": [
-                                "Cebu City",
-                                "Manila",
-                                "Davao City",
-                                "Quezon City",
-                                "Iloilo City"
+                                "February 2, 1987",
+                                "February 11, 1987",
+                                "January 17, 1987",
+                                "March 25, 1987",
+                                "April 7, 1987"
+                            ],
+                            "correct": 0,
+                            "explanation": "The 1987 Philippine Constitution was ratified on February 2, 1987, through a plebiscite where 76.37% of Filipino voters approved it, replacing the 1973 Constitution."
+                        },
+                        {
+                            "id": 2,
+                            "question": "Which article of the Constitution states that 'sovereignty resides in the people'?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Article I, Section 1",
+                                "Article II, Section 1",
+                                "Article III, Section 1",
+                                "Article IV, Section 1",
+                                "Article V, Section 1"
                             ],
                             "correct": 1,
-                            "explanation": "Manila is the capital city of the Philippines, located on the island of Luzon and serves as the country's political and economic center."
+                            "explanation": "Article II, Section 1 of the 1987 Constitution declares that 'sovereignty resides in the people and all government authority emanates from them.'"
+                        },
+                        {
+                            "id": 3,
+                            "question": "What does RA 8749 regulate?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Water pollution",
+                                "Air pollution",
+                                "Solid waste management",
+                                "Climate change",
+                                "Noise pollution"
+                            ],
+                            "correct": 1,
+                            "explanation": "Republic Act 8749, known as the Clean Air Act of 1999, provides for a comprehensive air pollution control policy and program in the Philippines."
+                        },
+                        {
+                            "id": 4,
+                            "question": "Which law established the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "RA 11054",
+                                "RA 9054",
+                                "RA 8371",
+                                "RA 7160",
+                                "RA 6734"
+                            ],
+                            "correct": 0,
+                            "explanation": "Republic Act 11054, the Bangsamoro Organic Law (BOL), was signed in 2018 and established the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)."
+                        },
+                        {
+                            "id": 5,
+                            "question": "What is the primary function of the Commission on Human Rights?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Prosecute criminal cases",
+                                "Investigate human rights violations",
+                                "Make laws on human rights",
+                                "Appoint government officials",
+                                "Conduct elections"
+                            ],
+                            "correct": 1,
+                            "explanation": "The Commission on Human Rights (CHR) is an independent constitutional body tasked with investigating all forms of human rights violations involving civil and political rights."
+                        },
+                        {
+                            "id": 6,
+                            "question": "Which environmental law addresses solid waste management in the Philippines?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "RA 8749 (Clean Air Act)",
+                                "RA 9275 (Clean Water Act)",
+                                "RA 9003 (Ecological Solid Waste Management Act)",
+                                "RA 9729 (Climate Change Act)",
+                                "RA 7586 (NIPAS Act)"
+                            ],
+                            "correct": 2,
+                            "explanation": "Republic Act 9003, the Ecological Solid Waste Management Act of 2000, provides for an ecological solid waste management program and creates the necessary institutional mechanisms."
                         }
                     ]
                 },
                 "mathematics": {
-                    "name": "Mathematics",
+                    "name": "Numerical Ability",
                     "lessons": [
                         {
                             "id": 1,
-                            "title": "Percentage and Ratio Problems",
-                            "content": "Master percentage calculations for civil service exams:",
+                            "title": "Basic Operations and PEMDAS",
+                            "content": "Master order of operations for accurate calculations:",
                             "points": [
-                                "📊 **Basic Formula:** (Part/Whole) × 100 = Percentage",
-                                "🔢 **Finding X% of Y:** (X/100) × Y",
-                                "📈 **Percentage Increase:** ((New-Old)/Old) × 100",
-                                "📉 **Percentage Decrease:** ((Old-New)/Old) × 100",
-                                "⚖️ **Ratio to Percentage:** Ratio a:b = (a/(a+b)) × 100%"
+                                "🔢 **PEMDAS Rule:** Parentheses, Exponents, Multiplication/Division, Addition/Subtraction",
+                                "📊 **Left to Right:** Operations of same priority go left to right",
+                                "🧮 **Parentheses First:** Always solve what's in parentheses first",
+                                "⚡ **Exponents Second:** Powers and roots come after parentheses",
+                                "➗ **Multiply/Divide:** Then multiplication and division (left to right)"
                             ],
-                            "memory_tip": "💡 **IS/OF Method:** 'IS' goes over 'OF' - What IS what percent OF what?",
-                            "example": "📝 **Budget Problem:** If a department's budget increased from ₱500,000 to ₱650,000, the increase is ((650,000-500,000)/500,000) × 100 = 30%"
+                            "memory_tip": "💡 **Please Excuse My Dear Aunt Sally** - PEMDAS memory device",
+                            "example": "📝 **Example:** 2 + 3 × 4² - (10 ÷ 2) = 2 + 3 × 16 - 5 = 2 + 48 - 5 = 45"
                         },
                         {
                             "id": 2,
-                            "title": "Number Series and Patterns",
-                            "content": "Identify patterns in number sequences:",
+                            "title": "Number Sequences and Patterns",
+                            "content": "Identify and continue numerical patterns:",
                             "points": [
-                                "🔢 **Arithmetic Series:** Add/subtract same number (2,4,6,8...)",
-                                "📈 **Geometric Series:** Multiply/divide by same number (2,6,18,54...)",
-                                "🔄 **Fibonacci Series:** Each number = sum of previous two (1,1,2,3,5,8...)",
-                                "🎯 **Square Series:** Perfect squares (1,4,9,16,25...)",
-                                "🧮 **Mixed Patterns:** Combination of operations"
+                                "🔢 **Arithmetic:** Add/subtract constant (5,8,11,14... +3 each)",
+                                "📈 **Geometric:** Multiply/divide constant (3,6,12,24... ×2 each)",
+                                "🔄 **Fibonacci:** Sum of previous two (1,1,2,3,5,8,13...)",
+                                "🎯 **Squares:** Perfect squares (1,4,9,16,25,36...)",
+                                "🧮 **Mixed:** Alternating operations or multiple patterns"
                             ],
-                            "memory_tip": "💡 **Find the Rule:** Look for +, -, ×, ÷ patterns or special sequences",
-                            "example": "📝 **Pattern:** 3,7,11,15,? → Add 4 each time → Answer: 19"
+                            "memory_tip": "💡 **Pattern Strategy:** Find difference between consecutive terms first",
+                            "example": "📝 **Arithmetic:** 7,12,17,22,? → +5 each time → Answer: 27"
                         },
                         {
                             "id": 3,
-                            "title": "Basic Geometry and Measurement",
-                            "content": "Essential geometry for practical applications:",
+                            "title": "Work, Time, and Percentage Problems",
+                            "content": "Solve practical word problems for government scenarios:",
                             "points": [
-                                "📐 **Triangle:** Sum of angles = 180°, Area = (base × height)/2",
-                                "⭕ **Circle:** Circumference = 2πr, Area = πr²",
-                                "📦 **Rectangle:** Area = length × width, Perimeter = 2(l+w)",
-                                "📏 **Units:** 1 meter = 100 cm, 1 km = 1000 m",
-                                "⏰ **Time:** 1 hour = 60 minutes, 1 day = 24 hours"
+                                "⏰ **Work Rate:** Work = Rate × Time (W = R × T)",
+                                "👥 **Combined Work:** 1/A + 1/B = 1/Together time",
+                                "📊 **Percentage:** Part/Whole × 100, increase/decrease formulas",
+                                "💰 **Money Problems:** Interest, discounts, budget allocations",
+                                "🚗 **Distance:** Distance = Speed × Time (D = S × T)"
                             ],
-                            "memory_tip": "💡 **π ≈ 3.14** for quick calculations, exact for word problems",
-                            "example": "📝 **Office Space:** A rectangular office 8m × 6m has area = 48 m² and perimeter = 28 m"
+                            "memory_tip": "💡 **Work Formula:** If A does job in 6 hours, rate = 1/6 job per hour",
+                            "example": "📝 **Work Problem:** If 3 clerks process 45 forms in 5 hours, rate per clerk = 45÷(3×5) = 3 forms/hour"
                         }
                     ],
                     "questions": [
@@ -527,6 +632,322 @@ class CivilServiceChat {
                             ],
                             "correct": 3,
                             "explanation": "This is a geometric series where each number is multiplied by 3: 2×3=6, 6×3=18, 18×3=54, 54×3=162."
+                        },
+                        {
+                            "id": 9,
+                            "question": "Solve using PEMDAS: 8 + 2 × (6 - 3)² ÷ 3",
+                            "type": "multiple-choice",
+                            "options": [
+                                "14",
+                                "16",
+                                "18",
+                                "20",
+                                "24"
+                            ],
+                            "correct": 1,
+                            "explanation": "Following PEMDAS: 8 + 2 × (6-3)² ÷ 3 = 8 + 2 × 3² ÷ 3 = 8 + 2 × 9 ÷ 3 = 8 + 18 ÷ 3 = 8 + 6 = 14"
+                        },
+                        {
+                            "id": 10,
+                            "question": "If 4 government employees can process 120 documents in 6 hours, how many documents can 6 employees process in 8 hours?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "180",
+                                "200",
+                                "240",
+                                "280",
+                                "320"
+                            ],
+                            "correct": 2,
+                            "explanation": "Rate per employee per hour = 120÷(4×6) = 5 documents. For 6 employees in 8 hours: 6×8×5 = 240 documents."
+                        },
+                        {
+                            "id": 11,
+                            "question": "What is the next number in the sequence: 1, 4, 9, 16, 25, ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "30",
+                                "32",
+                                "35",
+                                "36",
+                                "40"
+                            ],
+                            "correct": 3,
+                            "explanation": "This is a sequence of perfect squares: 1², 2², 3², 4², 5², 6² = 1, 4, 9, 16, 25, 36."
+                        },
+                        {
+                            "id": 12,
+                            "question": "A department's budget decreased from ₱800,000 to ₱720,000. What is the percentage decrease?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "8%",
+                                "10%",
+                                "12%",
+                                "15%",
+                                "20%"
+                            ],
+                            "correct": 1,
+                            "explanation": "Percentage decrease = ((Old-New)/Old) × 100 = ((800,000-720,000)/800,000) × 100 = (80,000/800,000) × 100 = 10%"
+                        },
+                        {
+                            "id": 13,
+                            "question": "If Employee A can complete a task in 12 hours and Employee B can complete the same task in 8 hours, how long will it take them working together?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "4.8 hours",
+                                "5.2 hours",
+                                "6.0 hours",
+                                "10.0 hours",
+                                "20.0 hours"
+                            ],
+                            "correct": 0,
+                            "explanation": "Combined rate = 1/12 + 1/8 = 2/24 + 3/24 = 5/24 tasks per hour. Time = 1 ÷ (5/24) = 24/5 = 4.8 hours."
+                        }
+                    ]
+                },
+                "analytical-ability": {
+                    "name": "Analytical Ability",
+                    "lessons": [
+                        {
+                            "id": 1,
+                            "title": "Word Analogies Fundamentals",
+                            "content": "Master word relationships for analytical reasoning:",
+                            "points": [
+                                "🔗 **Relationship Types:** Synonyms, antonyms, part-to-whole, cause-effect",
+                                "📝 **Format:** A is to B as C is to ? (A:B::C:?)",
+                                "🎯 **Strategy:** Identify the relationship first, then apply to second pair",
+                                "🔍 **Common Types:** Function, classification, degree, sequence",
+                                "⚡ **Quick Method:** Make a sentence with first pair, apply to second"
+                            ],
+                            "memory_tip": "💡 **Bridge Sentence:** Create a sentence connecting the first pair, then use same relationship for second pair",
+                            "example": "📝 **Example:** DOCTOR:HOSPITAL::TEACHER:? Answer: SCHOOL (both work in their respective institutions)"
+                        },
+                        {
+                            "id": 2,
+                            "title": "Types of Word Relationships",
+                            "content": "Common analogy patterns in civil service exams:",
+                            "points": [
+                                "👥 **Synonyms:** Words with similar meanings (happy:joyful)",
+                                "↔️ **Antonyms:** Words with opposite meanings (hot:cold)",
+                                "🏗️ **Part to Whole:** Component to complete item (wheel:car)",
+                                "⚙️ **Function:** Tool to its purpose (hammer:nail)",
+                                "📊 **Degree:** Intensity levels (warm:hot, like:love)"
+                            ],
+                            "memory_tip": "💡 **SAPFD:** Synonyms, Antonyms, Part-whole, Function, Degree - main relationship types",
+                            "example": "📝 **Function Example:** PEN:WRITE::KNIFE:CUT (both are tools used for specific actions)"
+                        }
+                    ],
+                    "questions": [
+                        {
+                            "id": 1,
+                            "question": "BOOK : LIBRARY :: MEDICINE : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Doctor",
+                                "Hospital",
+                                "Pharmacy",
+                                "Patient",
+                                "Prescription"
+                            ],
+                            "correct": 2,
+                            "explanation": "Books are stored and dispensed in libraries; medicines are stored and dispensed in pharmacies. The relationship is item to storage/distribution location."
+                        },
+                        {
+                            "id": 2,
+                            "question": "TEACHER : STUDENT :: DOCTOR : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Medicine",
+                                "Hospital",
+                                "Patient",
+                                "Nurse",
+                                "Stethoscope"
+                            ],
+                            "correct": 2,
+                            "explanation": "A teacher provides education to students; a doctor provides medical care to patients. The relationship is professional to the person they serve."
+                        },
+                        {
+                            "id": 3,
+                            "question": "HAPPY : ECSTATIC :: WARM : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Cold",
+                                "Cool",
+                                "Hot",
+                                "Freezing",
+                                "Mild"
+                            ],
+                            "correct": 2,
+                            "explanation": "Happy and ecstatic show degrees of positive emotion (mild to intense); warm and hot show degrees of temperature (mild to intense). This is a degree relationship."
+                        },
+                        {
+                            "id": 4,
+                            "question": "WHEEL : CAR :: WING : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Bird",
+                                "Airplane",
+                                "Feather",
+                                "Sky",
+                                "Flight"
+                            ],
+                            "correct": 1,
+                            "explanation": "A wheel is a part of a car that enables movement; a wing is a part of an airplane that enables flight. This is a part-to-whole relationship with function."
+                        },
+                        {
+                            "id": 5,
+                            "question": "AUTHOR : BOOK :: COMPOSER : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Music",
+                                "Symphony",
+                                "Piano",
+                                "Orchestra",
+                                "Concert"
+                            ],
+                            "correct": 1,
+                            "explanation": "An author creates books; a composer creates symphonies (or musical compositions). The relationship is creator to creation."
+                        },
+                        {
+                            "id": 6,
+                            "question": "BEGINNING : END :: SUNRISE : ?",
+                            "type": "multiple-choice",
+                            "options": [
+                                "Morning",
+                                "Sunset",
+                                "Noon",
+                                "Dawn",
+                                "Evening"
+                            ],
+                            "correct": 1,
+                            "explanation": "Beginning and end are opposites; sunrise and sunset are opposites (start and end of daylight). This is an antonym relationship."
+                        }
+                    ]
+                },
+                "reading-comprehension": {
+                    "name": "Reading Comprehension",
+                    "lessons": [
+                        {
+                            "id": 1,
+                            "title": "Reading Strategies for Civil Service Exams",
+                            "content": "Master effective reading techniques for exam success:",
+                            "points": [
+                                "📖 **Active Reading:** Engage with text by asking questions and making connections",
+                                "🎯 **Main Ideas:** Look for topic sentences and concluding statements",
+                                "🔍 **Context Clues:** Use surrounding words to understand unfamiliar terms",
+                                "📝 **Note-taking:** Jot down key points and relationships between ideas",
+                                "⏱️ **Time Management:** Spend 2-3 minutes reading, 1-2 minutes per question"
+                            ],
+                            "memory_tip": "💡 **SQ3R Method:** Survey, Question, Read, Recite, Review for better comprehension",
+                            "example": "📝 **Practice:** Read the title and first sentence to predict what the passage will discuss."
+                        },
+                        {
+                            "id": 2,
+                            "title": "Types of Reading Questions",
+                            "content": "Common question types in civil service reading comprehension:",
+                            "points": [
+                                "🎯 **Main Idea:** What is the passage primarily about?",
+                                "📋 **Supporting Details:** Specific facts or examples mentioned",
+                                "🔮 **Inference:** Conclusions drawn from given information",
+                                "📚 **Vocabulary:** Meaning of words in context",
+                                "🏗️ **Organization:** How ideas are structured and connected"
+                            ],
+                            "memory_tip": "💡 **Question Types:** Main + Details + Inference + Vocabulary + Structure = Complete understanding",
+                            "example": "📝 **Inference Example:** If passage mentions 'rising temperatures,' you might infer climate change effects."
+                        }
+                    ],
+                    "passages": [
+                        {
+                            "id": 1,
+                            "title": "The Bayanihan Spirit in Modern Philippines",
+                            "text": "The concept of Bayanihan, derived from the Filipino word 'bayan' meaning community, represents the spirit of communal unity and cooperation that has long been a cornerstone of Filipino culture. Traditionally exemplified by neighbors coming together to literally lift and move a house to a new location, Bayanihan has evolved to meet the challenges of modern Philippine society. During natural disasters, which frequently affect the archipelago, this spirit manifests in communities organizing relief efforts, sharing resources, and rebuilding together. The COVID-19 pandemic further highlighted the relevance of Bayanihan, as Filipinos worldwide organized mutual aid networks, supported frontline workers, and adapted traditional practices to digital platforms. Government programs have also adopted this concept, with the Bayanihan Acts of 2020 and 2021 providing emergency powers to address the pandemic. However, critics argue that while Bayanihan promotes solidarity, it can sometimes mask systemic issues that require structural solutions rather than community goodwill alone.",
+                            "questions": [
+                                {
+                                    "id": 1,
+                                    "question": "What is the main idea of the passage?",
+                                    "options": [
+                                        "Bayanihan is only relevant during natural disasters",
+                                        "The Bayanihan spirit has adapted to address modern challenges in Philippine society",
+                                        "Government programs are the best example of Bayanihan",
+                                        "Traditional Bayanihan practices are no longer useful",
+                                        "COVID-19 destroyed the Bayanihan spirit in the Philippines"
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "The passage discusses how the traditional concept of Bayanihan has evolved and adapted to address contemporary challenges in Philippine society, from natural disasters to the COVID-19 pandemic."
+                                },
+                                {
+                                    "id": 2,
+                                    "question": "According to the passage, what does the word 'bayan' mean?",
+                                    "options": [
+                                        "House",
+                                        "Community",
+                                        "Cooperation",
+                                        "Spirit",
+                                        "Tradition"
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "The passage explicitly states that Bayanihan is 'derived from the Filipino word bayan meaning community.'"
+                                },
+                                {
+                                    "id": 3,
+                                    "question": "What criticism of Bayanihan is mentioned in the passage?",
+                                    "options": [
+                                        "It is too expensive to implement",
+                                        "It only works in rural areas",
+                                        "It can mask systemic issues that need structural solutions",
+                                        "It is not compatible with modern technology",
+                                        "It creates too much government dependency"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The passage states that critics argue Bayanihan 'can sometimes mask systemic issues that require structural solutions rather than community goodwill alone.'"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Digital Transformation in Philippine Government Services",
+                            "text": "The Philippine government has embarked on an ambitious digital transformation initiative aimed at improving public service delivery and increasing government efficiency. The Digital Government Master Plan 2022-2028 outlines strategies to digitize government processes, enhance cybersecurity, and promote digital literacy among public servants. Key achievements include the implementation of the Philippine Identification System (PhilSys), which provides a unified national ID, and the expansion of online services through platforms like the Government Service Insurance System (GSIS) portal and the Social Security System (SSS) mobile app. The COVID-19 pandemic accelerated these efforts, as lockdown measures necessitated remote service delivery. However, challenges remain significant. The digital divide affects both government agencies and citizens, with rural areas often lacking reliable internet connectivity. Additionally, concerns about data privacy and cybersecurity have emerged, particularly following several high-profile data breaches in government systems. Training government employees in digital skills and ensuring equitable access to technology across all regions remain critical priorities for the successful implementation of digital government services.",
+                            "questions": [
+                                {
+                                    "id": 4,
+                                    "question": "What is the time frame of the Digital Government Master Plan mentioned in the passage?",
+                                    "options": [
+                                        "2020-2026",
+                                        "2021-2027",
+                                        "2022-2028",
+                                        "2023-2029",
+                                        "2024-2030"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The passage specifically mentions 'The Digital Government Master Plan 2022-2028' as the framework for the Philippines' digital transformation initiative."
+                                },
+                                {
+                                    "id": 5,
+                                    "question": "Which factor accelerated the government's digital transformation efforts?",
+                                    "options": [
+                                        "International pressure",
+                                        "Budget increases",
+                                        "The COVID-19 pandemic",
+                                        "New leadership",
+                                        "Technological advances"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The passage states that 'The COVID-19 pandemic accelerated these efforts, as lockdown measures necessitated remote service delivery.'"
+                                },
+                                {
+                                    "id": 6,
+                                    "question": "What can be inferred about the digital divide mentioned in the passage?",
+                                    "options": [
+                                        "It only affects government agencies",
+                                        "It is limited to urban areas",
+                                        "It creates unequal access to digital government services",
+                                        "It has been completely resolved",
+                                        "It only involves cybersecurity issues"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The passage indicates that the digital divide 'affects both government agencies and citizens, with rural areas often lacking reliable internet connectivity,' implying unequal access to digital services."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -645,10 +1066,28 @@ class CivilServiceChat {
             console.log('Review mode - lessons loaded:', this.lessons.length); // Debug log
         } else {
             // Practice and Mock Exam use questions
-            this.questions = [...this.data[this.currentTopic].questions];
+            if (this.currentTopic === 'reading-comprehension' && this.data[this.currentTopic].passages) {
+                // For reading comprehension, create questions array from passages
+                this.readingQuestions = [];
+                this.data[this.currentTopic].passages.forEach(passage => {
+                    passage.questions.forEach(q => {
+                        this.readingQuestions.push({
+                            ...q,
+                            passageTitle: passage.title,
+                            passageText: passage.text,
+                            passageId: passage.id
+                        });
+                    });
+                });
+                this.questions = this.readingQuestions; // For progress tracking
+            } else {
+                this.questions = [...this.data[this.currentTopic].questions || []];
+            }
+            
             this.currentQuestionIndex = 0;
             this.userAnswers = [];
             this.score = 0;
+            this.lastPassageId = null;
 
             // Shuffle questions for mock exam
             if (mode === 'mock-exam') {
@@ -720,6 +1159,12 @@ class CivilServiceChat {
     }
 
     showCurrentQuestion() {
+        // Check if this is reading comprehension and handle differently
+        if (this.currentTopic === 'reading-comprehension' && this.data[this.currentTopic].passages) {
+            this.showReadingComprehensionQuestion();
+            return;
+        }
+
         if (this.currentQuestionIndex >= this.questions.length) {
             this.finishSession();
             return;
@@ -738,6 +1183,56 @@ class CivilServiceChat {
             this.addMessage('bot', 'Sorry, there seems to be an issue with this question. Please try another topic.');
         }
         
+        this.updateQuestionProgress();
+    }
+
+    showReadingComprehensionQuestion() {
+        const passages = this.data[this.currentTopic].passages;
+        if (!passages || passages.length === 0) {
+            this.addMessage('bot', 'No reading passages available.');
+            return;
+        }
+
+        // Create a flat array of all questions from all passages
+        if (!this.readingQuestions) {
+            this.readingQuestions = [];
+            passages.forEach(passage => {
+                passage.questions.forEach(q => {
+                    this.readingQuestions.push({
+                        ...q,
+                        passageTitle: passage.title,
+                        passageText: passage.text,
+                        passageId: passage.id
+                    });
+                });
+            });
+        }
+
+        if (this.currentQuestionIndex >= this.readingQuestions.length) {
+            this.finishSession();
+            return;
+        }
+
+        const currentQ = this.readingQuestions[this.currentQuestionIndex];
+        
+        // Show passage if it's the first question from this passage
+        const isNewPassage = !this.lastPassageId || this.lastPassageId !== currentQ.passageId;
+        
+        if (isNewPassage) {
+            this.addMessage('bot', `📖 **${currentQ.passageTitle}**`);
+            setTimeout(() => {
+                this.addMessage('bot', currentQ.passageText);
+            }, 800);
+            setTimeout(() => {
+                this.addMessage('bot', `**Question ${this.currentQuestionIndex + 1}:** ${currentQ.question}`);
+                this.showMultipleChoiceOptions(currentQ.options);
+            }, 1600);
+            this.lastPassageId = currentQ.passageId;
+        } else {
+            this.addMessage('bot', `**Question ${this.currentQuestionIndex + 1}:** ${currentQ.question}`);
+            this.showMultipleChoiceOptions(currentQ.options);
+        }
+
         this.updateQuestionProgress();
     }
 
@@ -784,8 +1279,15 @@ class CivilServiceChat {
     }
 
     handleMultipleChoiceAnswer(selectedIndex) {
-        const question = this.questions[this.currentQuestionIndex];
-        const isCorrect = selectedIndex === question.correct;
+        let question, isCorrect;
+        
+        if (this.currentTopic === 'reading-comprehension' && this.readingQuestions) {
+            question = this.readingQuestions[this.currentQuestionIndex];
+            isCorrect = selectedIndex === question.correct;
+        } else {
+            question = this.questions[this.currentQuestionIndex];
+            isCorrect = selectedIndex === question.correct;
+        }
         
         // Hide options
         document.getElementById('answer-options').classList.add('hidden');
@@ -821,6 +1323,13 @@ class CivilServiceChat {
         this.addMessage('user', userAnswer);
         input.value = '';
 
+        // Check if we're in review mode waiting for input
+        if (this.currentMode === 'review' && this.waitingForMoreInput) {
+            this.handleReviewInput(userAnswer);
+            return;
+        }
+
+        // Regular question handling for practice/mock exam modes
         const question = this.questions[this.currentQuestionIndex];
         const isCorrect = this.checkTextAnswer(userAnswer, question.answer);
         
@@ -882,7 +1391,7 @@ class CivilServiceChat {
     }
 
     showCurrentLesson() {
-        console.log('showCurrentLesson called - lessons:', this.lessons.length, 'current index:', this.currentLessonIndex); // Debug
+        console.log('showCurrentLesson called - lessons:', this.lessons.length, 'current index:', this.currentLessonIndex);
         
         if (this.currentLessonIndex >= this.lessons.length) {
             this.finishReviewSession();
@@ -892,35 +1401,1040 @@ class CivilServiceChat {
         const lesson = this.lessons[this.currentLessonIndex];
         console.log('Current lesson:', lesson);
         
-        // Show lesson title
-        this.addMessage('bot', `📚 **${lesson.title}**`);
+        // Initialize lesson state for auto-flow
+        this.currentConceptIndex = 0;
+        this.currentLesson = lesson;
+        this.waitingForMoreInput = false;
+        this.autoFlowPaused = false;
+        this.userProgress = { correct: 0, total: 0 };
+        
+        // Start auto-flow immediately
+        this.startAutoFlowLesson();
+        this.updateQuestionProgress();
+    }
+
+    startAutoFlowLesson() {
+        const lesson = this.currentLesson;
+        
+        // Engaging opening with immediate value
+        this.addMessage('bot', `📚 Let's master ${lesson.title}!`);
         
         setTimeout(() => {
-            // Show lesson content
-            this.addMessage('bot', lesson.content);
+            this.addMessage('bot', this.getEngagingHook(lesson.title));
         }, 800);
-
+        
         setTimeout(() => {
-            // Show key points
-            lesson.points.forEach((point, index) => {
-                setTimeout(() => {
-                    this.addMessage('bot', point);
-                }, (index + 1) * 600);
-            });
+            this.addMessage('bot', "Here we go... 🚀");
         }, 1600);
-
+        
         setTimeout(() => {
-            // Show memory tip
-            this.addMessage('bot', lesson.memory_tip);
-        }, 1600 + (lesson.points.length * 600) + 400);
+            this.startAutoFlowConcepts();
+        }, 2400);
+    }
 
+    getEngagingHook(lessonTitle) {
+        const hooks = {
+            "Grammar Fundamentals": "🎯 This appears in 70% of exams - master it in 3 minutes!",
+            "Word Analogies Fundamentals": "🧩 The 3-step method that makes any analogy easy!",
+            "Basic Operations and PEMDAS": "🔢 Never make calculation mistakes again!",
+            "Philippine Constitution Fundamentals": "🏛️ Free points if you know these key facts!",
+            "Peace and Human Rights": "🕊️ Connect the dots between history, law, and current events!",
+            "Environment Management and Protection": "🌱 Essential laws every civil servant should know!",
+            "Reading Strategies for Civil Service Exams": "📖 Read faster and understand better!",
+            "Civil Service Commission (CSC)": "📋 Inside knowledge of how the system works!"
+        };
+        
+        return hooks[lessonTitle] || `🎓 Essential knowledge that appears frequently in exams!`;
+    }
+
+    startAutoFlowConcepts() {
+        this.currentConceptIndex = 0;
+        this.showAutoFlowConcept();
+    }
+
+    showAutoFlowConcept() {
+        const lesson = this.currentLesson;
+        
+        if (this.currentConceptIndex >= lesson.points.length) {
+            this.showAutoFlowPractice();
+            return;
+        }
+
+        const concept = lesson.points[this.currentConceptIndex];
+        const conceptNumber = this.currentConceptIndex + 1;
+        
+        // Show comprehensive explanation (Message 1)
+        const explanation = this.getDetailedConceptExplanation(concept, conceptNumber);
+        this.addMessage('bot', explanation);
+        
         setTimeout(() => {
-            // Show example
+            // Show exam strategy (Message 2)
+            const examStrategy = this.getExamStrategy(concept);
+            this.addMessage('bot', examStrategy);
+        }, 2500);
+        
+        // Show control buttons after first concept
+        if (this.currentConceptIndex === 0) {
+            setTimeout(() => {
+                this.showAutoFlowControls();
+            }, 4000);
+        }
+        
+        // Auto-advance to next concept
+        setTimeout(() => {
+            this.currentConceptIndex++;
+            this.showAutoFlowConcept();
+        }, 6000);
+    }
+
+    simplifyConceptText(concept) {
+        // Remove formatting and make more conversational
+        let simplified = concept.replace(/\*\*/g, '').replace(/🔢|📊|⚖️|🎯|📝|🔤|📖|✏️|🏛️|🌊|👨‍⚕️|📅|🕊️|👥|🤝|🛡️|🌱|🏭|💧|♻️|🌿|📋|⚙️|👥|📊|🎯|📜|🔗|📝|🔍|⚡|👥|↔️|🏗️|⚙️|📊/g, '');
+        
+        // Make it more direct and actionable
+        if (simplified.includes('Subject-Verb Agreement')) {
+            return 'Subject-Verb Agreement: ONE thing = IS, MANY things = ARE';
+        }
+        if (simplified.includes('PEMDAS')) {
+            return 'PEMDAS Order: Parentheses → Exponents → Multiply/Divide → Add/Subtract';
+        }
+        if (simplified.includes('Word analogy')) {
+            return 'Word Analogies: Find the relationship in first pair, apply to second pair';
+        }
+        if (simplified.includes('Executive Branch')) {
+            return 'Executive Branch: President implements laws and runs government';
+        }
+        if (simplified.includes('Merit and fitness')) {
+            return 'Merit System: Government jobs go to most qualified, not connections';
+        }
+        if (simplified.includes('Clean Air Act')) {
+            return 'Environmental Laws: RA 8749 (Air), RA 9275 (Water), RA 9003 (Waste)';
+        }
+        
+        return simplified.substring(0, 80) + (simplified.length > 80 ? '...' : '');
+    }
+
+    getQuickExample(concept) {
+        if (concept.includes('Subject-Verb Agreement')) {
+            return "📝 **Example:** 'The team IS playing' ✅ (team = one group) vs 'The players ARE playing' ✅ (players = many people)";
+        }
+        if (concept.includes('PEMDAS')) {
+            return "📝 **Example:** 2 + 3 × 4 = 2 + 12 = 14 (multiply first: 3×4=12, then add: 2+12=14)";
+        }
+        if (concept.includes('Word analogy')) {
+            return "📝 **Example:** BOOK:LIBRARY::MEDICINE:PHARMACY (both stored in their respective places)";
+        }
+        if (concept.includes('Executive Branch')) {
+            return "📝 **Example:** President signs laws, appoints Cabinet members, commands military";
+        }
+        if (concept.includes('Merit and fitness')) {
+            return "📝 **Example:** Hire based on exam scores and qualifications, not who you know";
+        }
+        if (concept.includes('Clean Air Act')) {
+            return "📝 **Example:** RA 8749 controls vehicle emissions and factory smoke pollution";
+        }
+        return null;
+    }
+
+    getQuickTip(concept) {
+        if (concept.includes('Subject-Verb Agreement')) {
+            return "💡 **Quick Tip:** When in doubt, ask 'Is it one thing or many things?'";
+        }
+        if (concept.includes('PEMDAS')) {
+            return "💡 **Quick Tip:** Remember 'Please Excuse My Dear Aunt Sally'";
+        }
+        if (concept.includes('Word analogy')) {
+            return "💡 **Quick Tip:** Make a sentence with the first pair, then apply same relationship";
+        }
+        if (concept.includes('Executive Branch')) {
+            return "💡 **Quick Tip:** Executive = Executes (carries out) the laws";
+        }
+        if (concept.includes('Merit and fitness')) {
+            return "💡 **Quick Tip:** Merit = Best qualified person gets the job";
+        }
+        return null;
+    }
+
+    showAutoFlowControls() {
+        const controlsHtml = `
+            <div class="auto-flow-controls">
+                <button id="more-details-btn" class="control-btn">📖 More Details</button>
+                <button id="skip-to-practice-btn" class="control-btn">🎯 Skip to Practice</button>
+            </div>
+        `;
+        
+        const messagesContainer = document.getElementById('chat-messages');
+        const controlsDiv = document.createElement('div');
+        controlsDiv.innerHTML = controlsHtml;
+        messagesContainer.appendChild(controlsDiv);
+        
+        // Add event listeners
+        document.getElementById('more-details-btn').addEventListener('click', () => this.showMoreDetails());
+        document.getElementById('skip-to-practice-btn').addEventListener('click', () => this.skipToPractice());
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    pauseAutoFlow() {
+        this.autoFlowPaused = !this.autoFlowPaused;
+        const pauseBtn = document.getElementById('pause-btn');
+        
+        if (this.autoFlowPaused) {
+            pauseBtn.textContent = '▶️ Continue';
+            this.addMessage('bot', "⏸️ Paused. Click Continue when ready, or use the other buttons for more options.");
+        } else {
+            pauseBtn.textContent = '⏸️ Pause';
+            this.addMessage('bot', "▶️ Continuing...");
+            setTimeout(() => {
+                this.currentConceptIndex++;
+                this.showAutoFlowConcept();
+            }, 1000);
+        }
+    }
+
+    showMoreDetails() {
+        const lesson = this.currentLesson;
+        const concept = lesson.points[this.currentConceptIndex];
+        const details = this.getDetailedExplanation(concept);
+        
+        this.addMessage('bot', details);
+        this.addMessage('bot', "Auto-flow will continue in 5 seconds, or click Pause to stop.");
+        
+        if (!this.autoFlowPaused) {
+            setTimeout(() => {
+                this.currentConceptIndex++;
+                this.showAutoFlowConcept();
+            }, 5000);
+        }
+    }
+
+    skipToPractice() {
+        this.addMessage('bot', "🎯 Jumping to practice questions...");
+        
+        setTimeout(() => {
+            this.showAutoFlowPractice();
+        }, 1000);
+    }
+
+    getDetailedConceptExplanation(concept, conceptNumber) {
+        if (concept.includes('Executive Branch')) {
+            return `📚 **Concept ${conceptNumber}: Executive Branch - The Government's Action Team**
+
+The Executive Branch is like the management team of Philippines Inc! 🏛️
+
+**What they actually do:**
+• **Implement laws** - Turn Congress's written laws into real programs and services
+• **Run daily government** - Manage all departments (health, education, defense, finance)
+• **Make executive decisions** - Handle crises, foreign relations, emergency responses
+• **Appoint key officials** - Choose Cabinet members, ambassadors, military leaders
+
+**Real-world example:**
+When Congress passes a law saying "provide free healthcare to senior citizens," the Executive Branch (Department of Health) actually:
+- Creates the PhilHealth programs
+- Builds health centers  
+- Trains doctors and nurses
+- Distributes medicines
+- Handles the day-to-day operations
+
+**Key players:**
+President (CEO), Vice President (backup CEO), Cabinet Secretaries (department heads)`;
+        }
+
+        if (concept.includes('Legislative Branch')) {
+            return `📚 **Concept ${conceptNumber}: Legislative Branch - The Law-Making Factory**
+
+Think of Congress as the "rule-making committee" for the entire Philippines! 🏛️
+
+**What they actually do:**
+• **Create laws** - Write, debate, and pass bills that become national laws
+• **Control the budget** - Decide how government money is spent (power of the purse)
+• **Investigate issues** - Hold hearings on corruption, disasters, public problems
+• **Represent the people** - Senators represent entire Philippines, Representatives represent districts
+
+**Two chambers working together:**
+- **Senate (24 members)** - Elected nationwide, 6-year terms, "upper house"
+- **House of Representatives (300+ members)** - Elected by district, 3-year terms, "lower house"
+
+**Real-world example:**
+When there's a problem like expensive rice, Congress:
+- Investigates why prices are high
+- Writes a law to control rice imports
+- Allocates budget for rice subsidies
+- Monitors if the law is working`;
+        }
+
+        if (concept.includes('Judicial Branch')) {
+            return `📚 **Concept ${conceptNumber}: Judicial Branch - The Referees of Government**
+
+The courts are like referees in a basketball game - they make sure everyone follows the rules! ⚖️
+
+**What they actually do:**
+• **Interpret laws** - Decide what laws mean when there's confusion or conflict
+• **Settle disputes** - Resolve conflicts between people, companies, or government agencies
+• **Check constitutionality** - Determine if laws or actions violate the Constitution
+• **Protect rights** - Ensure citizens' constitutional rights are respected
+
+**Court hierarchy (like a ladder):**
+- **Supreme Court (15 justices)** - Highest court, final decisions, constitutional issues
+- **Court of Appeals** - Reviews lower court decisions
+- **Regional Trial Courts** - Handle serious criminal and civil cases
+- **Municipal/City Courts** - Handle minor cases and local disputes
+
+**Real-world example:**
+If a new law says "no protests allowed," someone can challenge it in court. The Judicial Branch will decide if this law violates the Constitution's guarantee of free speech.`;
+        }
+
+        if (concept.includes('Subject-Verb Agreement')) {
+            return `📚 **Concept ${conceptNumber}: Subject-Verb Agreement - The Grammar Rule That Wins Points**
+
+This is the #1 grammar mistake that costs test-takers easy points! 📝
+
+**The simple rule:**
+• **ONE thing** = use IS, HAS, DOES, WAS
+• **MANY things** = use ARE, HAVE, DO, WERE
+
+**The tricky part - Collective nouns:**
+Words like TEAM, GOVERNMENT, COMMITTEE, FAMILY look like "many people" but they're treated as ONE unit:
+- The team IS playing (one team)
+- The government IS working (one government)  
+- The committee HAS decided (one committee)
+
+**Common mistakes to avoid:**
+❌ "The team are winning" → ✅ "The team IS winning"
+❌ "The government are planning" → ✅ "The government IS planning"
+❌ "The staff are meeting" → ✅ "The staff IS meeting"
+
+**Special cases:**
+- THE PHILIPPINES (country name) = singular → "The Philippines IS beautiful"
+- PEOPLE = always plural → "The people ARE voting"`;
+        }
+
+        if (concept.includes('PEMDAS')) {
+            return `📚 **Concept ${conceptNumber}: PEMDAS - The Math Order That Prevents Mistakes**
+
+PEMDAS isn't just a random order - it's like following a recipe! If you mix ingredients in wrong order, your cake fails. Same with math! 🔢
+
+**The correct order (PEMDAS):**
+1. **P**arentheses ( ) - Do what's inside parentheses first
+2. **E**xponents ^2 - Handle powers and square roots  
+3. **M**ultiplication × and **D**ivision ÷ - Left to right
+4. **A**ddition + and **S**ubtraction - - Left to right
+
+**Memory trick:**
+"Please Excuse My Dear Aunt Sally"
+
+**Why this matters:**
+Most people calculate left to right like reading: 2 + 3 × 4 = 5 × 4 = 20 ❌
+But math rules say: 2 + 3 × 4 = 2 + 12 = 14 ✅
+
+**Real example from government work:**
+Budget calculation: Base salary + (overtime hours × hourly rate)
+₱20,000 + (10 × ₱500) = ₱20,000 + ₱5,000 = ₱25,000
+NOT: (₱20,000 + 10) × ₱500 = ₱10,005,000 (wrong!)`;
+        }
+
+        if (concept.includes('Word analogy')) {
+            return `📚 **Concept ${conceptNumber}: Word Analogies - The Pattern Recognition Game**
+
+Word analogies are like solving puzzles - once you see the pattern, they become easy! 🧩
+
+**The secret formula:**
+1. **Find the relationship** in the first pair
+2. **Make a sentence** connecting them  
+3. **Apply the same relationship** to find the answer
+
+**Common relationship types:**
+• **Function:** PEN:WRITE (pen is used to write)
+• **Location:** BOOK:LIBRARY (books are stored in libraries)
+• **Part-to-whole:** WHEEL:CAR (wheel is part of a car)
+• **Synonyms:** HAPPY:JOYFUL (both mean the same)
+• **Antonyms:** HOT:COLD (opposites)
+• **Degree:** WARM:HOT (different intensities)
+
+**Step-by-step example:**
+DOCTOR:HOSPITAL::TEACHER:?
+1. Relationship: "Doctor works in hospital"
+2. Apply same: "Teacher works in ___"
+3. Answer: SCHOOL
+
+**Pro tip:**
+Always make your sentence specific enough that it only works one way!`;
+        }
+
+        // Default explanation for other concepts
+        return `📚 **Concept ${conceptNumber}: ${this.extractConceptTitle(concept)}**
+
+${concept.replace(/\*\*/g, '').replace(/🔢|📊|⚖️|🎯|📝|🔤|📖|✏️|🏛️|🌊|👨‍⚕️|📅|🕊️|👥|🤝|🛡️|🌱|🏭|💧|♻️|🌿|📋|⚙️|👥|📊|🎯|📜|🔗|📝|🔍|⚡|👥|↔️|🏗️|⚙️|📊/g, '')}
+
+This concept is essential for civil service success because it appears frequently in examinations and helps you understand how government systems work in practice.`;
+    }
+
+    getExamStrategy(concept) {
+        if (concept.includes('Executive Branch')) {
+            return `🎯 **Exam Strategy - Executive Branch**
+
+**Why this matters for your exam:**
+Appears in 8 out of 10 Constitutional Law questions!
+
+**Common exam questions:**
+• "Who implements the laws?" → **Executive Branch** ✅
+• "Who appoints Cabinet members?" → **President** ✅  
+• "Who commands the military?" → **President** (as Commander-in-Chief) ✅
+• "Can the President make laws?" → **NO** (only Congress can) ❌
+
+**Memory tricks for the exam:**
+• Executive = Execute = DO the work (like a company executive)
+• President = CEO of Philippines Inc.
+• Cabinet = President's management team
+
+**Tricky exam questions to watch for:**
+❌ "President makes laws" → NO! President signs/vetoes laws made by Congress
+❌ "President controls Supreme Court" → NO! President appoints, but can't control decisions
+✅ "President enforces laws" → YES! That's the main job
+
+**Quick exam facts:**
+• Presidential term: 6 years, NO re-election
+• Age requirement: 40+ years old (not 35 like in US)
+• Powers listed in: Article VII of Constitution`;
+        }
+
+        if (concept.includes('Legislative Branch')) {
+            return `🎯 **Exam Strategy - Legislative Branch**
+
+**Why this matters for your exam:**
+70% of Constitutional Law questions test legislative powers!
+
+**Common exam questions:**
+• "Who makes the laws?" → **Congress (Legislative Branch)** ✅
+• "Who controls government spending?" → **Congress (power of the purse)** ✅
+• "How many senators?" → **24 senators** ✅
+• "Senate term?" → **6 years** ✅
+• "House term?" → **3 years** ✅
+
+**Memory tricks for the exam:**
+• Legislative = Legislate = Make LAWS
+• Senate = 24 members, 6 years (both have 2 and 6)
+• House = 3 years (House has 3 letters in "Rep")
+
+**Exam trap questions:**
+❌ "Senate has 12 members" → NO! It's 24
+❌ "Senators serve 3 years" → NO! It's 6 years  
+❌ "President can dissolve Congress" → NO! Separation of powers
+✅ "Congress can override presidential veto" → YES! With 2/3 vote
+
+**Quick exam facts:**
+• Total Congress members: 24 Senate + 300+ House
+• Both chambers must pass a bill to become law
+• Congress controls: budget, taxes, declaring war`;
+        }
+
+        if (concept.includes('Subject-Verb Agreement')) {
+            return `🎯 **Exam Strategy - Subject-Verb Agreement**
+
+**Why this matters for your exam:**
+Appears in 90% of English/Verbal Ability tests!
+
+**Common exam questions:**
+• "The team ___ playing well." → **IS** ✅ (team = one unit)
+• "The government ___ working hard." → **IS** ✅ (government = one entity)
+• "The Philippines ___ a beautiful country." → **IS** ✅ (country name = singular)
+• "The people ___ voting today." → **ARE** ✅ (people = always plural)
+
+**Exam shortcuts:**
+• Collective nouns (team, government, committee, family) = **IS**
+• Country names (Philippines, United States) = **IS**  
+• "People" = always **ARE**
+• "Data" = can be **IS** or **ARE** (both accepted)
+
+**Instant exam wins:**
+✅ The Civil Service Commission IS responsible...
+✅ The Department of Education HAS announced...
+✅ The Supreme Court WAS established...
+❌ The team ARE winning (common wrong answer)
+
+**Pro exam tip:**
+When in doubt, ask "Is this ONE thing or MANY things?" ONE = IS, MANY = ARE`;
+        }
+
+        if (concept.includes('PEMDAS')) {
+            return `🎯 **Exam Strategy - PEMDAS**
+
+**Why this matters for your exam:**
+80% of numerical ability questions test order of operations!
+
+**Common exam questions:**
+• "8 + 2 × 3 = ?" → **14** ✅ (not 30!)
+• "20 - 4 × 3 + 2 = ?" → **10** ✅ (multiply first: 20 - 12 + 2)
+• "(5 + 3) × 2 = ?" → **16** ✅ (parentheses first: 8 × 2)
+
+**Exam shortcuts:**
+• See multiplication/division? Do them BEFORE addition/subtraction
+• See parentheses? Do them FIRST, always
+• Same level operations? Go left to right
+
+**Instant point-winners:**
+✅ 2 + 3 × 4 = 2 + 12 = 14
+✅ 10 ÷ 2 + 3 = 5 + 3 = 8  
+✅ (6 + 4) ÷ 2 = 10 ÷ 2 = 5
+❌ 2 + 3 × 4 = 5 × 4 = 20 (common wrong answer)
+
+**Pro exam tip:**
+When you see mixed operations, circle the multiplication and division first, solve them, then do addition and subtraction left to right.`;
+        }
+
+        if (concept.includes('Word analogy')) {
+            return `🎯 **Exam Strategy - Word Analogies**
+
+**Why this matters for your exam:**
+Appears in 100% of Professional Level Analytical Ability tests!
+
+**Common exam question types:**
+• BOOK:LIBRARY::MEDICINE:? → **PHARMACY** ✅ (storage location)
+• PEN:WRITE::KNIFE:? → **CUT** ✅ (function/purpose)  
+• HAPPY:ECSTATIC::WARM:? → **HOT** ✅ (degree/intensity)
+• TEACHER:STUDENT::DOCTOR:? → **PATIENT** ✅ (professional relationship)
+
+**Exam shortcuts:**
+• Make a sentence with first pair: "Books are stored in libraries"
+• Apply to second pair: "Medicines are stored in ___"
+• Answer: PHARMACY
+
+**Instant point-winners:**
+✅ Always identify the relationship first
+✅ Make your sentence specific and clear
+✅ Test your answer by making the same sentence
+❌ Don't just look for similar words
+
+**Pro exam tip:**
+The most common relationships are: function, location, part-to-whole, synonyms, antonyms, and degree. Learn to spot these patterns quickly!`;
+        }
+
+        // Default exam strategy
+        return `**🎯 Exam Strategy**
+
+This concept frequently appears in civil service examinations. Understanding it thoroughly will help you:
+• Answer related questions confidently
+• Apply the knowledge to practical scenarios  
+• Connect it with other related topics
+• Demonstrate comprehensive understanding
+
+**Key exam tip:** Practice applying this concept in different contexts to master it completely.`;
+    }
+
+    extractConceptTitle(concept) {
+        // Extract a clean title from the concept text
+        const match = concept.match(/\*\*(.*?)\*\*/);
+        if (match) {
+            return match[1].replace(/:/g, '');
+        }
+        return concept.substring(0, 50).replace(/\*\*/g, '').replace(/🔢|📊|⚖️|🎯|📝|🔤|📖|✏️|🏛️|🌊|👨‍⚕️|📅|🕊️|👥|🤝|🛡️|🌱|🏭|💧|♻️|🌿|📋|⚙️|👥|📊|🎯|📜|🔗|📝|🔍|⚡|👥|↔️|🏗️|⚙️|📊/g, '');
+    }
+
+    showAutoFlowPractice() {
+        this.addMessage('bot', "💪 Time for quick practice to lock in your learning!");
+        
+        setTimeout(() => {
+            this.practiceQuestions = this.generatePracticeQuestions();
+            this.currentPracticeIndex = 0;
+            
+            if (this.practiceQuestions.length > 0) {
+                this.addMessage('bot', "I'll give you a few quick questions. Just click your answer - no typing needed! 😊");
+                setTimeout(() => {
+                    this.showPracticeQuestion();
+                }, 1200);
+            } else {
+                this.showLessonSummary();
+            }
+        }, 1200);
+    }
+
+    showLessonHook() {
+        const lesson = this.currentLesson;
+        const hooks = this.getLessonHook(lesson.title);
+        
+        this.addMessage('bot', hooks.opening);
+        
+        setTimeout(() => {
+            this.addMessage('bot', hooks.question);
+        }, 1200);
+        
+        setTimeout(() => {
+            this.addMessage('bot', hooks.promise);
+        }, 2400);
+        
+        setTimeout(() => {
+            this.addMessage('bot', "Ready to dive in? Type 'Yes' to start learning, or 'Skip' to jump to practice questions.");
+            this.waitingForMoreInput = true;
+            this.showInputControls();
+        }, 3600);
+    }
+
+    getLessonHook(lessonTitle) {
+        const hooks = {
+            "Grammar Fundamentals": {
+                opening: "🎯 Did you know that 65% of test-takers lose points on grammar questions that are actually quite easy?",
+                question: "Have you ever been confused about when to use 'IS' vs 'ARE'? Or mixed up 'their' and 'there'? 🤔",
+                promise: "In the next few minutes, I'll teach you the simple tricks that grammar experts use to get these right every time! 🚀"
+            },
+            "Word Analogies Fundamentals": {
+                opening: "🧩 Word analogies appear in 80% of Professional Level exams - and they're actually easier than they look!",
+                question: "Ever seen 'BOOK:LIBRARY::MEDICINE:?' and felt confused? 😅",
+                promise: "I'll show you the 3-step method that makes any analogy crystal clear. You'll be solving these in seconds! ⚡"
+            },
+            "Basic Operations and PEMDAS": {
+                opening: "🔢 Here's a shocking fact: Most people get 8 + 2 × 3 wrong on their first try!",
+                question: "What do you think the answer is? 30 or 14? 🤨",
+                promise: "I'll teach you the PEMDAS trick that ensures you never make calculation mistakes again! 🎯"
+            },
+            "Philippine Constitution Fundamentals": {
+                opening: "🏛️ The 1987 Constitution questions are actually FREE POINTS if you know the key facts!",
+                question: "Did you know there's a simple pattern to remember all the important dates and numbers? 📅",
+                promise: "I'll share the memory tricks that law students use to ace constitutional law! 💡"
+            },
+            "Peace and Human Rights": {
+                opening: "🕊️ Peace and Human Rights questions often stump test-takers, but they follow predictable patterns!",
+                question: "Ever wondered why the Philippines has so many peace processes? 🤝",
+                promise: "I'll connect the dots between history, law, and current events to make this topic crystal clear! 🌟"
+            }
+        };
+        
+        return hooks[lessonTitle] || {
+            opening: `🎓 Let's master ${lessonTitle} - this topic appears frequently in civil service exams!`,
+            question: "Ready to learn the insider secrets that top scorers use? 🚀",
+            promise: "I'll break this down into simple, memorable concepts that you'll never forget! 💪"
+        };
+    }
+
+    handleReviewInput(userInput) {
+        const input = userInput.toLowerCase().trim();
+        
+        if (this.lessonPhase === 'hook') {
+            if (input === 'yes' || input === 'y') {
+                this.lessonPhase = 'explain';
+                this.hideInputControls();
+                setTimeout(() => this.startConversationalExplanation(), 500);
+            } else if (input === 'skip' || input === 's') {
+                this.lessonPhase = 'practice';
+                this.hideInputControls();
+                setTimeout(() => this.startInteractivePractice(), 500);
+            } else {
+                this.addMessage('bot', "Just type 'Yes' to learn step-by-step, or 'Skip' to jump to practice! 😊");
+            }
+        } else if (this.lessonPhase === 'explain') {
+            this.handleExplanationInput(input);
+        } else if (this.lessonPhase === 'practice') {
+            this.handlePracticeInput(input);
+        }
+    }
+
+    startConversationalExplanation() {
+        const lesson = this.currentLesson;
+        this.currentConceptIndex = 0;
+        
+        this.addMessage('bot', "Perfect! Let's start with the basics... 📚");
+        
+        setTimeout(() => {
+            this.explainConceptConversationally();
+        }, 800);
+    }
+
+    explainConceptConversationally() {
+        const lesson = this.currentLesson;
+        
+        if (this.currentConceptIndex >= lesson.points.length) {
+            this.moveToInteractivePractice();
+            return;
+        }
+
+        const concept = lesson.points[this.currentConceptIndex];
+        const explanation = this.getConversationalExplanation(concept);
+        
+        this.addMessage('bot', explanation.setup);
+        
+        setTimeout(() => {
+            this.addMessage('bot', explanation.explanation);
+        }, 1200);
+        
+        setTimeout(() => {
+            this.addMessage('bot', explanation.example);
+        }, 2400);
+        
+        setTimeout(() => {
+            this.addMessage('bot', explanation.check);
+            this.waitingForMoreInput = true;
+            this.showInputControls();
+        }, 3600);
+    }
+
+    getConversationalExplanation(concept) {
+        if (concept.includes('Subject-Verb Agreement')) {
+            return {
+                setup: "Let's talk about something that trips up even native speakers... 🤔",
+                explanation: "Think of it like counting: ONE thing uses 'IS', MANY things use 'ARE'. Simple, right? The tricky part is recognizing what counts as 'one' vs 'many'.",
+                example: "For example: 'The TEAM is playing' (one team) vs 'The PLAYERS are playing' (many players). The team might have 11 players, but it's still ONE team! ⚽",
+                check: "Does this make sense? Type 'Yes' if you get it, or 'More' if you want another example! 😊"
+            };
+        }
+        
+        if (concept.includes('PEMDAS')) {
+            return {
+                setup: "Here's the secret that math teachers don't always explain clearly... 🔢",
+                explanation: "PEMDAS isn't just a random order - it's like following a recipe! You MUST do ingredients in the right order, or your cake will be ruined. Same with math!",
+                example: "Try this: 2 + 3 × 4. Most people think '2 + 3 = 5, then 5 × 4 = 20'. WRONG! It's '3 × 4 = 12, then 2 + 12 = 14'. Multiplication comes before addition! 🎯",
+                check: "Make sense? Type 'Yes' if you've got it, or 'Practice' to try one yourself! 💪"
+            };
+        }
+        
+        if (concept.includes('Word analogy')) {
+            return {
+                setup: "Word analogies seem scary, but they're actually like solving puzzles... 🧩",
+                explanation: "The secret is to make a sentence with the first pair, then use the SAME relationship for the second pair. It's like finding the pattern!",
+                example: "BOOK:LIBRARY - 'Books are stored in libraries.' So MEDICINE:? - 'Medicines are stored in...' PHARMACIES! The relationship is 'item stored in location'. 💡",
+                check: "See the pattern? Type 'Yes' if this clicks, or 'Another' for a different example! 🎯"
+            };
+        }
+        
+        // Default conversational explanation
+        return {
+            setup: "Let me break this down in a way that's easy to remember... 💡",
+            explanation: concept.replace(/\*\*/g, '').replace(/🔢|📊|⚖️|🎯/g, ''),
+            example: "Here's how this works in real life: " + (this.getConceptExample(concept) || "This concept helps you understand the bigger picture."),
+            check: "Does this make sense to you? Type 'Yes' to continue or 'More' for additional explanation! 😊"
+        };
+    }
+
+    handleExplanationInput(input) {
+        if (input === 'yes' || input === 'y') {
+            this.currentConceptIndex++;
+            this.hideInputControls();
+            setTimeout(() => this.explainConceptConversationally(), 500);
+        } else if (input === 'more' || input === 'm' || input === 'another') {
+            this.hideInputControls();
+            this.showAdditionalExplanation();
+        } else if (input === 'practice' || input === 'p') {
+            this.lessonPhase = 'practice';
+            this.hideInputControls();
+            setTimeout(() => this.startInteractivePractice(), 500);
+        } else {
+            this.addMessage('bot', "Just type 'Yes' to continue, 'More' for extra explanation, or 'Practice' to try some questions! 😊");
+        }
+    }
+
+    showAdditionalExplanation() {
+        const lesson = this.currentLesson;
+        const concept = lesson.points[this.currentConceptIndex];
+        const additional = this.getDetailedExplanation(concept);
+        
+        this.addMessage('bot', additional);
+        
+        setTimeout(() => {
+            this.addMessage('bot', "Got it now? Type 'Yes' to move on, or 'Practice' to try some questions! 🎯");
+            this.waitingForMoreInput = true;
+            this.showInputControls();
+        }, 1500);
+    }
+
+    moveToInteractivePractice() {
+        this.lessonPhase = 'practice';
+        this.addMessage('bot', "Awesome! You've learned the concepts. Now let's practice to make sure you've really got this! 💪");
+        
+        setTimeout(() => {
+            this.addMessage('bot', "I'll give you some quick questions. Don't worry - I'll help you if you get stuck! 😊");
+        }, 1200);
+        
+        setTimeout(() => {
+            this.startInteractivePractice();
+        }, 2400);
+    }
+
+    startInteractivePractice() {
+        // Create simple practice questions based on the lesson
+        this.practiceQuestions = this.generatePracticeQuestions();
+        this.currentPracticeIndex = 0;
+        
+        if (this.practiceQuestions.length > 0) {
+            this.showPracticeQuestion();
+        } else {
+            this.showLessonSummary();
+        }
+    }
+
+    generatePracticeQuestions() {
+        const lesson = this.currentLesson;
+        
+        if (lesson.title.includes('Grammar')) {
+            return [
+                {
+                    question: "Quick check! Which is correct?",
+                    options: ["The team are winning", "The team is winning"],
+                    correct: 1,
+                    explanation: "Perfect! 'Team' is one group, so we use 'is'. You've got this! 🎉"
+                },
+                {
+                    question: "One more! Choose the right one:",
+                    options: ["The students is studying", "The students are studying"],
+                    correct: 1,
+                    explanation: "Excellent! 'Students' is plural (many), so we use 'are'. You're mastering this! ⭐"
+                }
+            ];
+        }
+        
+        if (lesson.title.includes('PEMDAS')) {
+            return [
+                {
+                    question: "Let's try one: What's 5 + 2 × 3?",
+                    options: ["21", "11"],
+                    correct: 1,
+                    explanation: "Yes! Multiplication first: 2 × 3 = 6, then 5 + 6 = 11. You've got PEMDAS! 🎯"
+                }
+            ];
+        }
+        
+        if (lesson.title.includes('Word Analogies')) {
+            return [
+                {
+                    question: "Try this analogy: PEN:WRITE::KNIFE:?",
+                    options: ["Sharp", "Cut", "Kitchen", "Metal"],
+                    correct: 1,
+                    explanation: "Brilliant! Pen is used to write, knife is used to cut. You found the function relationship! 🧩"
+                }
+            ];
+        }
+        
+        return []; // No practice questions for this lesson type
+    }
+
+    showPracticeQuestion() {
+        if (this.currentPracticeIndex >= this.practiceQuestions.length) {
+            this.showMasteryCheck();
+            return;
+        }
+        
+        const question = this.practiceQuestions[this.currentPracticeIndex];
+        
+        this.addMessage('bot', question.question);
+        
+        setTimeout(() => {
+            this.showPracticeOptions(question.options);
+        }, 800);
+    }
+
+    showPracticeOptions(options) {
+        const optionsContainer = document.getElementById('answer-options');
+        optionsContainer.innerHTML = '';
+        optionsContainer.classList.remove('hidden');
+
+        options.forEach((option, index) => {
+            const optionBtn = document.createElement('button');
+            optionBtn.className = 'answer-option';
+            optionBtn.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+            optionBtn.addEventListener('click', () => {
+                this.handlePracticeAnswer(index);
+            });
+            optionsContainer.appendChild(optionBtn);
+        });
+    }
+
+    handlePracticeAnswer(selectedIndex) {
+        const question = this.practiceQuestions[this.currentPracticeIndex];
+        const isCorrect = selectedIndex === question.correct;
+        
+        // Hide options
+        document.getElementById('answer-options').classList.add('hidden');
+        
+        // Show user's answer
+        const selectedOption = question.options[selectedIndex];
+        this.addMessage('user', `${String.fromCharCode(65 + selectedIndex)}. ${selectedOption}`);
+        
+        // Update progress
+        this.userProgress.total++;
+        if (isCorrect) {
+            this.userProgress.correct++;
+        }
+        
+        // Show feedback
+        setTimeout(() => {
+            if (isCorrect) {
+                this.addMessage('bot', question.explanation);
+            } else {
+                this.addMessage('bot', `Not quite! The correct answer is ${String.fromCharCode(65 + question.correct)}. ${question.explanation}`);
+            }
+            
+            this.currentPracticeIndex++;
+            
+            setTimeout(() => {
+                this.showPracticeQuestion();
+            }, 2000);
+        }, 500);
+    }
+
+    showMasteryCheck() {
+        const percentage = Math.round((this.userProgress.correct / this.userProgress.total) * 100);
+        
+        if (percentage >= 80) {
+            this.addMessage('bot', `🎉 Outstanding! You scored ${percentage}% - you've mastered this concept!`);
+            this.addMessage('bot', "You're ready for exam questions on this topic. Great job! 🌟");
+        } else if (percentage >= 60) {
+            this.addMessage('bot', `👍 Good work! You scored ${percentage}%. You understand the basics!`);
+            this.addMessage('bot', "With a bit more practice, you'll have this down perfectly. Keep it up! 💪");
+        } else {
+            this.addMessage('bot', `📚 You scored ${percentage}%. No worries - this is how learning works!`);
+            this.addMessage('bot', "Let me give you one more explanation to help it click... 🤔");
+        }
+        
+        setTimeout(() => {
+            this.showLessonSummary();
+        }, 2000);
+    }
+
+    showInputControls() {
+        document.getElementById('chat-input').style.display = 'block';
+        document.getElementById('send-btn').style.display = 'block';
+        document.getElementById('chat-input').placeholder = "Type your response...";
+    }
+
+    hideInputControls() {
+        document.getElementById('chat-input').style.display = 'none';
+        document.getElementById('send-btn').style.display = 'none';
+        this.waitingForMoreInput = false;
+    }
+
+    showNextConcept() {
+        const lesson = this.currentLesson;
+        
+        if (this.currentConceptIndex >= lesson.points.length) {
+            // All concepts shown, show memory tip and example
+            this.showLessonSummary();
+            return;
+        }
+
+        const concept = lesson.points[this.currentConceptIndex];
+        this.addMessage('bot', concept);
+        
+        // Add simple example for this concept if available
+        const conceptExamples = this.getConceptExample(concept);
+        if (conceptExamples) {
+            setTimeout(() => {
+                this.addMessage('bot', conceptExamples);
+            }, 800);
+        }
+        
+        setTimeout(() => {
+            this.askForMoreDetails();
+        }, conceptExamples ? 1600 : 800);
+    }
+
+    getConceptExample(concept) {
+        // Extract simple examples based on concept content
+        if (concept.includes('Subject-Verb Agreement')) {
+            return "📝 **Example:** 'The student IS studying' (singular) vs 'The students ARE studying' (plural)";
+        }
+        if (concept.includes('PEMDAS')) {
+            return "📝 **Example:** 2 + 3 × 4 = 2 + 12 = 14 (multiply first, then add)";
+        }
+        if (concept.includes('Arithmetic Series')) {
+            return "📝 **Example:** 2, 5, 8, 11... (add 3 each time)";
+        }
+        if (concept.includes('Synonyms')) {
+            return "📝 **Example:** HAPPY:JOYFUL (both mean the same thing)";
+        }
+        if (concept.includes('Executive Branch')) {
+            return "📝 **Example:** President signs laws, appoints officials, commands military";
+        }
+        if (concept.includes('Merit and fitness')) {
+            return "📝 **Example:** Hire based on exam scores and qualifications, not connections";
+        }
+        if (concept.includes('Clean Air Act')) {
+            return "📝 **Example:** RA 8749 controls vehicle emissions and factory smoke";
+        }
+        if (concept.includes('Active Reading')) {
+            return "📝 **Example:** Ask 'What is this about?' while reading each paragraph";
+        }
+        return null;
+    }
+
+    askForMoreDetails() {
+        this.addMessage('bot', "Need more explanation or examples? Type 'Yes' for more details, or 'Next' to continue.");
+        this.waitingForMoreInput = true;
+        
+        // Show input controls
+        document.getElementById('chat-input').style.display = 'block';
+        document.getElementById('send-btn').style.display = 'block';
+        document.getElementById('chat-input').placeholder = "Type 'Yes' or 'Next'";
+    }
+
+    handleReviewInput(userInput) {
+        const input = userInput.toLowerCase().trim();
+        
+        if (input === 'yes' || input === 'y') {
+            this.showMoreDetails();
+        } else if (input === 'next' || input === 'n') {
+            this.moveToNextConcept();
+        } else {
+            this.addMessage('bot', "Please type 'Yes' for more details or 'Next' to continue.");
+        }
+    }
+
+    showMoreDetails() {
+        const lesson = this.currentLesson;
+        const concept = lesson.points[this.currentConceptIndex];
+        
+        // Provide detailed explanation based on concept
+        let details = this.getDetailedExplanation(concept);
+        
+        this.addMessage('bot', details);
+        
+        setTimeout(() => {
+            this.addMessage('bot', "Ready to continue? Type 'Next' to move on.");
+        }, 1000);
+    }
+
+    getDetailedExplanation(concept) {
+        if (concept.includes('Subject-Verb Agreement')) {
+            return "🔍 **More Details:** Singular subjects (one person/thing) use singular verbs (is, has, does). Plural subjects (multiple) use plural verbs (are, have, do). Collective nouns like 'team' are usually singular.";
+        }
+        if (concept.includes('PEMDAS')) {
+            return "🔍 **More Details:** Remember the order: Parentheses ( ), Exponents ^, Multiplication ×, Division ÷, Addition +, Subtraction -. Operations of equal priority go left to right.";
+        }
+        if (concept.includes('Word analogy')) {
+            return "🔍 **More Details:** First identify the relationship between the first pair, then find the same relationship in the answer choices. Common types: synonyms, antonyms, part-to-whole, function, degree.";
+        }
+        if (concept.includes('Executive Branch')) {
+            return "🔍 **More Details:** The President is both Head of State and Head of Government. Powers include: executing laws, appointing officials, commanding armed forces, conducting foreign policy, granting pardons.";
+        }
+        if (concept.includes('Merit and fitness')) {
+            return "🔍 **More Details:** This means government jobs go to the most qualified candidates through competitive exams and evaluations, not through political connections, family ties, or favoritism.";
+        }
+        return "🔍 **More Details:** This concept is fundamental to understanding the topic. Practice applying it in different scenarios to master it completely.";
+    }
+
+    moveToNextConcept() {
+        this.currentConceptIndex++;
+        this.waitingForMoreInput = false;
+        
+        // Hide input controls
+        document.getElementById('chat-input').style.display = 'none';
+        document.getElementById('send-btn').style.display = 'none';
+        document.getElementById('chat-input').placeholder = "Type your answer...";
+        
+        setTimeout(() => {
+            this.showNextConcept();
+        }, 500);
+    }
+
+    showLessonSummary() {
+        const lesson = this.currentLesson;
+        
+        // Show memory tip
+        this.addMessage('bot', lesson.memory_tip);
+        
+        setTimeout(() => {
+            // Show main example
             this.addMessage('bot', lesson.example);
-        }, 1600 + (lesson.points.length * 600) + 800);
-
+        }, 800);
+        
         setTimeout(() => {
-            // Show continue button
+            // Show lesson completion options
             if (this.currentLessonIndex < this.lessons.length - 1) {
                 document.getElementById('next-btn').classList.remove('hidden');
                 document.getElementById('next-btn').textContent = 'Next Lesson';
@@ -928,9 +2442,7 @@ class CivilServiceChat {
                 document.getElementById('finish-btn').classList.remove('hidden');
                 document.getElementById('finish-btn').textContent = 'Finish Review';
             }
-        }, 1600 + (lesson.points.length * 600) + 1200);
-
-        this.updateQuestionProgress();
+        }, 1600);
     }
 
     finishReviewSession() {
@@ -1057,7 +2569,14 @@ class CivilServiceChat {
         
         const bubble = document.createElement('div');
         bubble.className = 'message-bubble';
-        bubble.textContent = text;
+        
+        // Convert line breaks to HTML and preserve formatting
+        const formattedText = text
+            .replace(/\n\n/g, '<br><br>')  // Double line breaks
+            .replace(/\n/g, '<br>')        // Single line breaks
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold text
+        
+        bubble.innerHTML = formattedText;
         
         if (sender === 'bot') {
             messageDiv.appendChild(avatar);

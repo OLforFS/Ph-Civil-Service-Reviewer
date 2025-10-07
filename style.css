@@ -211,6 +211,37 @@ body {
     font-size: 0.9rem;
 }
 
+/* Auto-flow controls */
+.auto-flow-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 0.5rem 1rem;
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: #4a5568;
+}
+
+.control-btn:hover {
+    border-color: #667eea;
+    background: #edf2f7;
+    transform: translateY(-1px);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
 .chat-container {
     flex: 1;
     padding: 1rem;
